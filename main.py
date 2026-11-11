@@ -26,7 +26,7 @@ icon = pygame.image.load('./img/ufo.png')
 pygame.display.set_icon(icon)
 
 # Player
-hero = Character(370, 480, './img/player.png', 0)
+hero = Character(370, 480, './img/player.png', 0, 0)
 
 # Enemy
 enemyImg = []
