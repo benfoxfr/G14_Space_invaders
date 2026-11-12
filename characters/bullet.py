@@ -2,7 +2,7 @@ import pygame
 
 
 class Bullet:
-    def __init__(self,position: list,position_change: list, state, img_path):
+    def __init__(self, position: list, position_change: list, state, img_path):
         """
         Initialisation des variables intiales du projet
         """
