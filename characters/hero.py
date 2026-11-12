@@ -1,10 +1,13 @@
-from character import Character
+from characters.character import Character
+from characters.bullet import Bullet
+import pygame
+from pygame import mixer
 
 # con
 GAME_OVER = "Game over !"
 CONTINUE = "Continer le jeu !"
 
-class Hero(Character):
+class Hero(Character, Bullet):
 
     def __init__(self, positionX: int, positionY: int, sprite: str, characterX_change: int, nombre_vies):
         """
@@ -13,9 +16,12 @@ class Hero(Character):
         super().__init__(positionX, positionY, sprite, characterX_change,nombre_vies)
 
 
-    @property
-    def determiner_statut_partie(self):
+    def load_sprite(self):
         """
-        Déterminer le statut de la partie en cours
+               Chargement du chemin source de l'image de charactère
+
         """
-        return  GAME_OVER if self.nombre_vies == 0 else CONTINUE
+        return pygame.image.load(self.sprite)
+
+    def fire(self):
+        pass
