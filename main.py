@@ -61,8 +61,6 @@ def main():
     for i in range(num_of_enemies):
         enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, 1, 40, 0))
 
-    enemyImg = [enemy.load_sprite for enemy in enemies]
-
     # Bullet
 
     # Ready - You can't see the bullet on the screen
@@ -151,7 +149,7 @@ def main():
                 enemies[i].get_position[X] = random.randint(0, 736)
                 enemies[i].get_position[Y] = random.randint(50, 150)
 
-            screen.blit(enemyImg[i], enemies[i].get_position)
+            screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
         # Bullet Movement
         if bullet.get_position()[Y] <= 0:
