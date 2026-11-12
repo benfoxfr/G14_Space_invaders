@@ -10,6 +10,7 @@ class Character:
         self.sprite = sprite
         self.characterX_change = characterX_change
         self.nombre_vies = nombre_vies
+
     @property
     def get_sprite(self):
         """
@@ -67,7 +68,7 @@ class Character:
         """
         Accesseur du nombre de vies d'un caractère
         """
-        return self.nombere_vies
+        return self.nombre_vies
 
     def move(self):
         pass
