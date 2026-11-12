@@ -55,11 +55,8 @@ def main():
     hero = Hero([370, 480], PLAYER, 0, 0)
 
     # Enemy
-    enemies = []
     num_of_enemies = random.randint(25, 30)
-
-    for i in range(num_of_enemies):
-        enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, 1, 40, 0))
+    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, 1, 40, 0) for _ in range(num_of_enemies)]
 
     # Bullet
 
