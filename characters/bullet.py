@@ -9,11 +9,11 @@ class Bullet(Character):
 
     FIRE = "fire"
     READY = "ready"
-    def __init__(self, position: list,position_change: list, sprite:str, state: str, x_change= None,):
+    def __init__(self, position: list, sprite:str,position_change: list, state: str):
         """
         Initialisation des variables intiales du projet
         """
-        super().__init__(position,sprite,x_change,0)
+        super().__init__(position,sprite,position_change,0)
         self.position_change = position_change
         self.state = state
 
