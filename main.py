@@ -52,7 +52,7 @@ def main():
     pygame.display.set_icon(icon)
 
     # Player
-    hero = Hero([370, 480], PLAYER, [0, 0], 0)
+    hero = Hero([370, 480],  [0, 0], PLAYER,0)
 
     # Enemy
     num_of_enemies = random.randint(25, 30)
@@ -63,7 +63,7 @@ def main():
     # Ready - You can't see the bullet on the screen
     # Fire - The bullet is currently moving
 
-    bullet = Bullet([hero.position[0], 480], [0, 10], "ready", BULLET)
+    bullet = Bullet([hero.position[0], 480],BULLET, [0, 10], "ready")
 
     # Score
 
@@ -97,9 +97,9 @@ def main():
                         bulletSound.set_volume(0.4)
                         bulletSound.play()
                         # Get the current x cordinate of the spaceship
-                        bullet.get_position()[X] = hero.get_position[X]
+                        bullet.get_position[X] = hero.get_position[X]
                         bullet.state = "fire"
-                        screen.blit(bullet.load_img(), (bullet.get_position()[X] + 16, bullet.get_position()[Y] + 10))
+                        screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
@@ -133,12 +133,12 @@ def main():
                 enemies[i].get_position[Y] += enemies[i].get_position_change[Y]
 
             # Collision
-            collision = isCollision(enemies[i].get_position[X], enemies[i].get_position[Y], bullet.get_position()[X], bullet.get_position()[Y])
+            collision = isCollision(enemies[i].get_position[X], enemies[i].get_position[Y], bullet.get_position[X], bullet.get_position[Y])
             if collision:
                 explosionSound = mixer.Sound(EXPLOSION_SOUND)
                 explosionSound.set_volume(0.2)
                 explosionSound.play()
-                bullet.get_position()[Y] = 480
+                bullet.get_position[Y] = 480
                 bullet.state = "ready"
                 score_value += 1
                 enemies[i].get_position[X] = random.randint(0, 736)
@@ -147,13 +147,13 @@ def main():
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
         # Bullet Movement
-        if bullet.get_position()[Y] <= 0:
-            bullet.get_position()[Y] = 480
+        if bullet.get_position[Y] <= 0:
+            bullet.get_position[Y] = 480
             bullet.state = "ready"
 
         if bullet.state == "fire":
-            screen.blit(bullet.load_img(), (bullet.get_position()[X] + 16, bullet.get_position()[Y] + 10))
-            bullet.get_position()[Y] -= bullet.get_position_change()[Y]
+            screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
+            bullet.get_position[Y] -= bullet.get_position_change[Y]
 
         screen.blit(hero.load_sprite, hero.get_position)
 
