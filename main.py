@@ -1,9 +1,7 @@
 import math
 import random
-
 import pygame
 from pygame import mixer
-
 from characters.hero import Hero
 from characters.enemies import Enemy
 from characters.bullet import Bullet
@@ -12,7 +10,6 @@ X = 0
 Y = 1
 TEXTX = 10
 TEXTY = 10
-
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
@@ -85,34 +82,25 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            # if keystroke is pressed check whether its right or left
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    hero.set_positionX(-5, position_change=True)
-                if event.key == pygame.K_RIGHT:
-                    hero.set_positionX(5, position_change=True)
-                if event.key == pygame.K_SPACE:
-                    if bullet.state == "ready":
-                        bulletSound = mixer.Sound(LASER_SOUND)
-                        bulletSound.set_volume(0.4)
-                        bulletSound.play()
-                        # Get the current x cordinate of the spaceship
-                        bullet.get_position[X] = hero.get_position[X]
-                        bullet.state = "fire"
-                        screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    hero.set_positionX(0, position_change=True)
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                if bullet.state == "ready":
+                    bulletSound = mixer.Sound(LASER_SOUND)
+                    bulletSound.set_volume(0.4)
+                    bulletSound.play()
+                    # Get the current x cordinate of the spaceship
+                    bullet.state = "fire"
+                    bullet.get_position[X] = hero.get_position[X]
+                    screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
+
+            # La gestion des touches utilisateurs pour le héro
+            hero.handle_moves(event)
 
         # 5 = 5 + -0.1 -> 5 = 5 - 0.1
         # 5 = 5 + 0.1
 
-        hero.get_position[X] += hero.get_position_change[X]
-        if hero.get_position[X] <= 0:
-            hero.set_positionX(0)
-        elif hero.get_position[X] >= 736:
-            hero.set_positionX(736)
+        # Permet à l'héro de rester dans le cadre du jeu
+        hero.move_limitations(X, Y)
 
         # Enemy Movement
         for i in range(num_of_enemies):
@@ -147,13 +135,10 @@ def main():
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
         # Bullet Movement
-        if bullet.get_position[Y] <= 0:
-            bullet.get_position[Y] = 480
-            bullet.state = "ready"
+        bullet.move_limitations(X, Y)
 
-        if bullet.state == "fire":
-            screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
-            bullet.get_position[Y] -= bullet.get_position_change[Y]
+        # Pemettre de tirer des balles du vaisseau spatiale
+        bullet.fire(screen , X, Y)
 
         screen.blit(hero.load_sprite, hero.get_position)
 

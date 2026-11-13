@@ -1,15 +1,8 @@
-import pygame
 from characters.character import Character
 
-
-
 class Bullet(Character):
-    X = 0
-    Y = 1
 
-    FIRE = "fire"
-    READY = "ready"
-    def __init__(self, position: list, sprite:str,position_change: list, state: str):
+    def __init__(self, position: list, sprite:str,position_change: list, state: str,):
         """
         Initialisation des variables intiales du projet
         """
@@ -28,15 +21,25 @@ class Bullet(Character):
         """
         self.state = new_state
 
-    def move(self, screen):
-        print(list(self.get_position))
-        if self.get_position[self.Y] <= 0:
-            self.get_position[self.Y] = 480
-            self.set_state(self.READY)
+    def fire(self, screen, X, Y):
+        """
+        Cette fonction permet de tirer une balle du vaisseau lorsque l'état de cette balle est fire
+        """
 
-        if self.get_state == self.FIRE:
-            screen.blit(self.load_sprite, (self.get_position[self.X] + 16, self.get_position[self.Y] + 10))
-            self.get_position[self.Y] -= self.get_position_change[self.Y]
+        if self.state == "fire":
+            screen.blit(self.load_sprite, (self.get_position[X] + 16, self.get_position[Y] + 10))
+            self.get_position[Y] -= self.get_position_change[Y]
+
+    def move_limitations(self, X, Y):
+        """
+        Cette fonction permet que les balles du vaisseau reste dans le cadre du jeu
+        """
+        if self.get_position[X] <= 0:
+            self.get_position[Y] = 480
+            self.set_state("ready")
+
+
+
 
 
 
