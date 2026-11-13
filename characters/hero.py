@@ -1,9 +1,8 @@
 from characters.character import Character
-from characters.bullet import Bullet
 import pygame
 from pygame import mixer
 
-class Hero(Character, Bullet):
+class Hero(Character):
 
     def __init__(self, position: list[int], sprite: str, characterX_change: int, nombre_vies: int):
         """
@@ -13,4 +12,6 @@ class Hero(Character, Bullet):
 
 
     def fire(self):
+        pass
+    def move(self, screen):
         pass
