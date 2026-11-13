@@ -17,9 +17,6 @@ class Bullet(Character):
         self.position_change = position_change
         self.state = state
 
-    def get_position_change(self):
-        return self.position_change
-
     def get_state(self):
         """
         Accesseur de la valeur de l'état
