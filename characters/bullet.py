@@ -33,6 +33,9 @@ class Bullet:
         return self.state
 
     def load_img(self):
+        """
+        Charger une image depuis son chemin fichier
+        """
         return pygame.image.load(self.img_path)
 
 
