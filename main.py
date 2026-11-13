@@ -13,6 +13,7 @@ Y = 1
 TEXTX = 10
 TEXTY = 10
 
+
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
