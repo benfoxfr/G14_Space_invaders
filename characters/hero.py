@@ -10,8 +10,8 @@ class Hero(Character):
         """
         super().__init__(position, sprite, characterX_change, nombre_vies)
 
-
     def fire(self):
         pass
+
     def move(self, screen):
         pass
