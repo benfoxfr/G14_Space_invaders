@@ -52,11 +52,11 @@ def main():
     pygame.display.set_icon(icon)
 
     # Player
-    hero = Hero([370, 480], PLAYER, 0, 0)
+    hero = Hero([370, 480], PLAYER, [0, 0], 0)
 
     # Enemy
     num_of_enemies = random.randint(25, 30)
-    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, 1, 40, 0) for _ in range(num_of_enemies)]
+    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [1, 40], 0) for _ in range(num_of_enemies)]
 
     # Bullet
 
@@ -88,9 +88,9 @@ def main():
             # if keystroke is pressed check whether its right or left
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    hero.set_characterX_change(-5)
+                    hero.set_positionX(-5, position_change=True)
                 if event.key == pygame.K_RIGHT:
-                    hero.set_characterX_change(5)
+                    hero.set_positionX(5, position_change=True)
                 if event.key == pygame.K_SPACE:
                     if bullet.state == "ready":
                         bulletSound = mixer.Sound(LASER_SOUND)
@@ -103,12 +103,12 @@ def main():
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    hero.set_characterX_change(X)
+                    hero.set_positionX(0, position_change=True)
 
         # 5 = 5 + -0.1 -> 5 = 5 - 0.1
         # 5 = 5 + 0.1
 
-        hero.get_position[X] += hero.get_characterX_change
+        hero.get_position[X] += hero.get_position_change[X]
         if hero.get_position[X] <= 0:
             hero.set_positionX(0)
         elif hero.get_position[X] >= 736:
@@ -128,10 +128,10 @@ def main():
 
             enemies[i].get_position[X] += enemies[i].get_position_change[X]
             if enemies[i].get_position[X] <= 0:
-                enemies[i].set_positionX_change(1)
+                enemies[i].set_positionX(1, position_change=True)
                 enemies[i].get_position[Y] += enemies[i].get_position_change[Y]
             elif enemies[i].get_position[X] >= 736:
-                enemies[i].set_positionX_change(-1)
+                enemies[i].set_positionX(-1, position_change=True)
                 enemies[i].get_position[Y] += enemies[i].get_position_change[Y]
 
             # Collision
@@ -157,7 +157,7 @@ def main():
             screen.blit(bullet.load_img(), (bullet.get_position()[X] + 16, bullet.get_position()[Y] + 10))
             bullet.get_position()[Y] -= bullet.get_position_change()[Y]
 
-        screen.blit(hero.load_sprite(), hero.get_position)
+        screen.blit(hero.load_sprite, hero.get_position)
 
         # Score
         score = font.render("Score : " + str(score_value), True, (255, 255, 255))
