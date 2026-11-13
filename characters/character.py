@@ -2,7 +2,7 @@ import pygame
 
 
 class Character:
-    def __init__(self, position: list[int], sprite: str, position_change: list[int], nombre_vies: int):
+    def __init__(self, position: list[int], sprite: str, position_change: list[int], nombre_vies = 1):
         """
         Initialisation des variables
         """

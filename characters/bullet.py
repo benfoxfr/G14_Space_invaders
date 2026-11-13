@@ -6,7 +6,7 @@ class Bullet(Character):
         """
         Initialisation des variables intiales du projet
         """
-        super().__init__(position,sprite,position_change,0)
+        super().__init__(position,sprite,position_change)
         self.position_change = position_change
         self.state = state
 
