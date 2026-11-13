@@ -16,12 +16,5 @@ class Hero(Character, Bullet):
         super().__init__(positionX, positionY, sprite, characterX_change,nombre_vies)
 
 
-    def load_sprite(self):
-        """
-               Chargement du chemin source de l'image de charactère
-
-        """
-        return pygame.image.load(self.sprite)
-
     def fire(self):
         pass
