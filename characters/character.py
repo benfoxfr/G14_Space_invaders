@@ -2,13 +2,17 @@ import pygame
 
 
 class Character:
-    def __init__(self, position: list[int], sprite: str, characterX_change: int, nombre_vies: int):
+    def __init__(self, position: list[int], sprite: str, position_change: list[int], nombre_vies: int):
         """
         Initialisation des variables
         """
+        if len(position) != 2:
+            raise ValueError(f"La liste {position} doit contenir la position [x, y]")
         self.position = position
         self.sprite = sprite
-        self.characterX_change = characterX_change
+        if len(position_change) != 2:
+            raise ValueError(f"La liste {position_change} doit contenir la position [x, y]")
+        self.position_change = position_change
         self.nombre_vies = nombre_vies
 
     @property
@@ -26,11 +30,11 @@ class Character:
         return self.position
 
     @property
-    def get_characterX_change(self):
+    def get_position_change(self):
         """
         Accesseur de l'abcisse de la position du charactère
         """
-        return self.characterX_change
+        return self.position_change
 
     @property
     def load_sprite(self):
@@ -40,23 +44,23 @@ class Character:
         """
         return pygame.image.load(self.sprite)
 
-    def set_positionX(self, new_position):
+    def set_positionX(self, new_position, position_change=False):
         """
         Initialisation de la position x du charactère
         """
-        self.position[0] = new_position
+        if position_change:
+            self.position_change[0] = new_position
+        else:
+            self.position[0] = new_position
 
-    def set_positionY(self, new_position):
+    def set_positionY(self, new_position, position_change=False):
         """
         Initialisation de la position y du charactère
         """
-        self.position[1] = new_position
-
-    def set_characterX_change(self, new_character_change):
-        """
-        Changement de la position x du charactère
-        """
-        self.characterX_change = new_character_change
+        if position_change:
+            self.position_change[0] = new_position
+        else:
+            self.position[1] = new_position
 
     def set_sprite(self, new_sprite):
         """
@@ -69,10 +73,4 @@ class Character:
         Accesseur du nombre de vies d'un caractère
         """
         return self.nombre_vies
-
-    def move(self):
-        pass
-
-    def fire(self):
-        pass
 
