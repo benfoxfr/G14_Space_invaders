@@ -2,11 +2,11 @@ import pygame
 
 
 class Character:
-    def __init__(self, positionX: int, positionY: int, sprite: str, characterX_change: int, nombre_vies: int):
+    def __init__(self, position: list[int], sprite: str, characterX_change: int, nombre_vies: int):
         """
         Initialisation des variables
         """
-        self.position = [positionX, positionY]
+        self.position = position
         self.sprite = sprite
         self.characterX_change = characterX_change
         self.nombre_vies = nombre_vies
