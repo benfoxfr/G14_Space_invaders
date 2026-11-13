@@ -5,5 +5,14 @@ class Enemy(Character):
         super().__init__(position, sprite, enemy_change, nombre_vies)
 
 
+    def game_over(self, screen, font):
+        game_over = font.render("GAME OVER", True, (255, 255, 255))
+        screen.blit(game_over, (200, 250))
+
+    def deplacement(self):
+        pass
+
+
+
 
 
