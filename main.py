@@ -122,9 +122,7 @@ def main():
                 for j in range(num_of_enemies):
                     enemies[j].set_positionX(2000)
 
-                over_text = over_font.render("GAME OVER", True, (255, 255, 255))
-                screen.blit(over_text, (200, 250))
-                break
+                enemies[i].game_over(screen, over_font)
 
             enemies[i].get_position[X] += enemies[i].get_position_change[X]
             if enemies[i].get_position[X] <= 0:
