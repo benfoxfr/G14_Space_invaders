@@ -40,9 +40,10 @@ class Bullet(Character):
             self.get_position[self.Y] = 480
             self.set_state("ready")
 
-    def isCollision(self, pos: list[int]) -> bool:
-        distance = math.sqrt(math.pow(pos[self.X] - self.position[self.X], 2) + (math.pow(pos[self.Y] - self.position[self.Y], 2)))
-        if distance < 27:
-            return True
-        else:
-            return False
+    def isCollision(self, pos: list[int], seuil_collision=27) -> bool:
+        """
+        Détermine si il y a une collision entre un autre joueur que le héro et un projectile (bullet dans ce cas-ci)
+        :param pos: la position de l'autre joueur
+        :return: True ssi la distance entre la distance euclidienne entre le projectile et l'autre joueur est strictement inférieure  à 27
+        """
+        return math.sqrt(math.pow(pos[self.X] - self.position[self.X], 2) + (math.pow(pos[self.Y] - self.position[self.Y], 2))) < seuil_collision
