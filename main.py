@@ -10,6 +10,7 @@ X = 0
 Y = 1
 TEXTX = 10
 TEXTY = 10
+VITESSE_ENEMY = 2
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
@@ -53,7 +54,7 @@ def main():
 
     # Enemy
     num_of_enemies = random.randint(25, 30)
-    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [1, 40], 0) for _ in range(num_of_enemies)]
+    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40], 0) for _ in range(num_of_enemies)]
 
     # Bullet
 
@@ -112,13 +113,7 @@ def main():
 
                 enemies[i].game_over(screen, over_font)
 
-            enemies[i].get_position[X] += enemies[i].get_position_change[X]
-            if enemies[i].get_position[X] <= 0:
-                enemies[i].set_positionX(1, position_change=True)
-                enemies[i].get_position[Y] += enemies[i].get_position_change[Y]
-            elif enemies[i].get_position[X] >= 736:
-                enemies[i].set_positionX(-1, position_change=True)
-                enemies[i].get_position[Y] += enemies[i].get_position_change[Y]
+            enemies[i].deplacement(VITESSE_ENEMY)
 
             # Collision
             collision = isCollision(enemies[i].get_position[X], enemies[i].get_position[Y], bullet.get_position[X], bullet.get_position[Y])
