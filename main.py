@@ -101,7 +101,7 @@ def main():
         # 5 = 5 + 0.1
 
         # Permet à l'héro de rester dans le cadre du jeu
-        hero.move_limitations(X, Y)
+        hero.move_limitations()
 
         # Enemy Movement
         for i in range(num_of_enemies):
@@ -130,10 +130,10 @@ def main():
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
         # Bullet Movement
-        bullet.move_limitations(X, Y)
+        bullet.move_limitations()
 
         # Pemettre de tirer des balles du vaisseau spatiale
-        bullet.fire(screen , X, Y)
+        bullet.fire(screen)
 
         screen.blit(hero.load_sprite, hero.get_position)
 
