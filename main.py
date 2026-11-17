@@ -21,9 +21,6 @@ BULLET = './img/bullet.png'
 LASER_SOUND = './wav/laser.wav'
 
 
-
-
-
 def main():
     # Intialize the pygame
     pygame.init()
@@ -78,7 +75,6 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 if bullet.state == "ready":
                     bulletSound = mixer.Sound(LASER_SOUND)
@@ -113,14 +109,8 @@ def main():
             # Collision
             collision = bullet.isCollision(enemies[i].position)
             if collision:
-                explosionSound = mixer.Sound(EXPLOSION_SOUND)
-                explosionSound.set_volume(0.2)
-                explosionSound.play()
-                bullet.get_position[Y] = 480
-                bullet.state = "ready"
+                enemies[i].mort(EXPLOSION_SOUND, bullet)
                 score_value += 1
-                enemies[i].get_position[X] = random.randint(0, 736)
-                enemies[i].get_position[Y] = random.randint(50, 150)
 
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 

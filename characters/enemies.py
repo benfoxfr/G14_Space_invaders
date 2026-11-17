@@ -1,4 +1,7 @@
 from characters.character import Character
+from characters.bullet import Bullet
+from pygame import mixer
+import random
 
 class Enemy(Character):
     def __init__(self, position: list[int], sprite: str, position_change: list[int]):
@@ -16,6 +19,15 @@ class Enemy(Character):
         elif self.position[self.X] >= taille_ecran:
             self.position_change[self.X] = -vitesse
             self.position[self.Y] += self.position_change[self.Y]
+
+    def mort(self, son: str, bullet: Bullet, position_tir=480, volume=0.2):
+        explosionSound = mixer.Sound(son)
+        explosionSound.set_volume(volume)
+        explosionSound.play()
+        bullet.set_positionY(position_tir)
+        bullet.set_state("ready")
+        self.position[self.X] = random.randint(0, 736)
+        self.position[self.Y] = random.randint(50, 150)
 
 
 
