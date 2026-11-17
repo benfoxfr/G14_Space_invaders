@@ -13,6 +13,8 @@ class Character:
         if len(position_change) != 2:
             raise ValueError(f"La liste {position_change} doit contenir la position [x, y]")
         self.position_change = position_change
+        self.X = 0
+        self.Y = 1
 
     @property
     def get_sprite(self):
@@ -48,18 +50,18 @@ class Character:
         Initialisation de la position x du charactère
         """
         if position_change:
-            self.position_change[0] = new_position
+            self.position_change[self.X] = new_position
         else:
-            self.position[0] = new_position
+            self.position[self.X] = new_position
 
     def set_positionY(self, new_position, position_change=False):
         """
         Initialisation de la position y du charactère
         """
         if position_change:
-            self.position_change[0] = new_position
+            self.position_change[self.X] = new_position
         else:
-            self.position[1] = new_position
+            self.position[self.Y] = new_position
 
     def set_sprite(self, new_sprite):
         """

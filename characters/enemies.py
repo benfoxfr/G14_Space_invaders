@@ -3,8 +3,6 @@ from characters.character import Character
 class Enemy(Character):
     def __init__(self, position: list[int], sprite: str, position_change: list[int]):
         super().__init__(position, sprite, position_change)
-        self.X = 0
-        self.Y = 1
 
     def game_over(self, screen, font):
         game_over = font.render("GAME OVER", True, (255, 255, 255))
