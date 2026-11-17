@@ -1,8 +1,8 @@
 from characters.character import Character
 
 class Enemy(Character):
-    def __init__(self, position: list[int], sprite: str, position_change: list[int], nombre_vies: int):
-        super().__init__(position, sprite, position_change, nombre_vies)
+    def __init__(self, position: list[int], sprite: str, position_change: list[int]):
+        super().__init__(position, sprite, position_change)
         self.X = 0
         self.Y = 1
 

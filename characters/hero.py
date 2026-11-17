@@ -3,11 +3,11 @@ import pygame
 
 class Hero(Character):
 
-    def __init__(self, position: list[int],position_change: list[int], sprite: str, nombre_vies: int):
+    def __init__(self, position: list[int], position_change: list[int], sprite: str):
         """
         Initialise les paramètres de la classe Héro
         """
-        super().__init__(position,sprite, position_change, nombre_vies)
+        super().__init__(position, sprite, position_change)
 
 
     def move_limitations(self, X, Y):

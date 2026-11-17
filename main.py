@@ -50,18 +50,18 @@ def main():
     pygame.display.set_icon(icon)
 
     # Player
-    hero = Hero([370, 480],  [0, 0], PLAYER,0)
+    hero = Hero([370, 480],  [0, 0], PLAYER)
 
     # Enemy
     num_of_enemies = random.randint(25, 30)
-    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40], 0) for _ in range(num_of_enemies)]
+    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40]) for _ in range(num_of_enemies)]
 
     # Bullet
 
     # Ready - You can't see the bullet on the screen
     # Fire - The bullet is currently moving
 
-    bullet = Bullet([hero.position[0], 480],BULLET, [0, 10], "ready")
+    bullet = Bullet([hero.position[0], 480], BULLET, [0, 10], "ready")
 
     # Score
 

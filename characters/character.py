@@ -2,7 +2,7 @@ import pygame
 
 
 class Character:
-    def __init__(self, position: list[int], sprite: str, position_change: list[int], nombre_vies = 1):
+    def __init__(self, position: list[int], sprite: str, position_change: list[int]):
         """
         Initialisation des variables
         """
@@ -13,7 +13,6 @@ class Character:
         if len(position_change) != 2:
             raise ValueError(f"La liste {position_change} doit contenir la position [x, y]")
         self.position_change = position_change
-        self.nombre_vies = nombre_vies
 
     @property
     def get_sprite(self):
@@ -68,9 +67,4 @@ class Character:
         """
         self.sprite = new_sprite
 
-    def get_nombres_vies(self):
-        """
-        Accesseur du nombre de vies d'un caractère
-        """
-        return self.nombre_vies
 
