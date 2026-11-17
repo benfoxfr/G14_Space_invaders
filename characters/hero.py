@@ -23,6 +23,7 @@ class Hero(Character):
     def handle_moves(self, event, vitesse= 5):
         """
         Cette fonction permet de gérer les mouvements du héro dans le cadre du jeu
+        :param vitesse: la vitesse qui est mis à 5 par défaut
         :param event: un évènement d'utilisateur d'appuyer sur une des flèches suivantes
         [UP, RIGHT, LEFT ]
         """
