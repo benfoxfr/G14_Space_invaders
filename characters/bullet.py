@@ -1,4 +1,5 @@
 from characters.character import Character
+import math
 
 class Bullet(Character):
 
@@ -38,3 +39,10 @@ class Bullet(Character):
         if self.get_position[self.Y] <= 0:
             self.get_position[self.Y] = 480
             self.set_state("ready")
+
+    def isCollision(self, pos: list[int]) -> bool:
+        distance = math.sqrt(math.pow(pos[self.X] - self.position[self.X], 2) + (math.pow(pos[self.Y] - self.position[self.Y], 2)))
+        if distance < 27:
+            return True
+        else:
+            return False

@@ -21,12 +21,7 @@ BULLET = './img/bullet.png'
 LASER_SOUND = './wav/laser.wav'
 
 
-def isCollision(enemyX: int, enemyY: int, bulletX: int, bulletY: int) -> bool:
-    distance = math.sqrt(math.pow(enemyX - bulletX, 2) + (math.pow(enemyY - bulletY, 2)))
-    if distance < 27:
-        return True
-    else:
-        return False
+
 
 
 def main():
@@ -116,7 +111,7 @@ def main():
             enemies[i].deplacement(VITESSE_ENEMY)
 
             # Collision
-            collision = isCollision(enemies[i].get_position[X], enemies[i].get_position[Y], bullet.get_position[X], bullet.get_position[Y])
+            collision = bullet.isCollision(enemies[i].position)
             if collision:
                 explosionSound = mixer.Sound(EXPLOSION_SOUND)
                 explosionSound.set_volume(0.2)
