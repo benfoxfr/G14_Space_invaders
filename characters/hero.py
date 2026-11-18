@@ -12,7 +12,7 @@ class Hero(Character):
         Initialise les paramètres de la classe Héro
         """
         super().__init__(position, sprite, position_change)
-        self.LASER_SOUND ='./wav/laser.wav'
+
 
     def move_limitations(self, limitation=736):
         """
@@ -45,16 +45,17 @@ class Hero(Character):
 
 
 
-    def shoot(self, screen, bullet: Bullet, event,):
+    def shoot(self, screen, bullet: Bullet, event,sound : str):
         """
         Permet à l'utilisateur de se déplacer dans le jeu
+        :param sound: le chemin du bruit lorsque le héro tire
         :param screen: l'écran du jeu
         :param bullet:  l'object bullet
         :param event: l'action réalisée par le joueur
         """
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
             if bullet.state == "ready":
-                bulletSound = mixer.Sound(self.LASER_SOUND)
+                bulletSound = mixer.Sound(sound)
                 bulletSound.set_volume(0.4)
                 bulletSound.play()
                 # Get the current x cordinate of the spaceship

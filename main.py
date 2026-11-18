@@ -74,7 +74,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            hero.shoot(screen,bullet,event)
+            hero.shoot(screen,bullet,event, LASER_SOUND)
             hero.move(event)
 
         # 5 = 5 + -0.1 -> 5 = 5 - 0.1
