@@ -106,8 +106,6 @@ def main():
         # Bullet Movement
         bullet.move_limitations()
 
-        print(bullet.state)
-
         # Pemettre de tirer des balles du vaisseau spatiale
         bullet.fire(screen)
 
