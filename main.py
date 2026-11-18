@@ -1,4 +1,3 @@
-import math
 import random
 import pygame
 from pygame import mixer
@@ -75,18 +74,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                if bullet.state == "ready":
-                    bulletSound = mixer.Sound(LASER_SOUND)
-                    bulletSound.set_volume(0.4)
-                    bulletSound.play()
-                    # Get the current x cordinate of the spaceship
-                    bullet.state = "fire"
-                    bullet.get_position[X] = hero.get_position[X]
-                    screen.blit(bullet.load_sprite, (bullet.get_position[X] + 16, bullet.get_position[Y] + 10))
-
-            # La gestion des touches utilisateurs pour le héro
-            hero.handle_moves(event)
+            hero.shoot(screen,bullet,event)
+            hero.move(event)
 
         # 5 = 5 + -0.1 -> 5 = 5 - 0.1
         # 5 = 5 + 0.1
@@ -116,6 +105,8 @@ def main():
 
         # Bullet Movement
         bullet.move_limitations()
+
+        print(bullet.state)
 
         # Pemettre de tirer des balles du vaisseau spatiale
         bullet.fire(screen)

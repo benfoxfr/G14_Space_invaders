@@ -38,7 +38,7 @@ class Bullet(Character):
         """
         if self.get_position[self.Y] <= 0:
             self.get_position[self.Y] = 480
-            self.set_state("ready")
+            self.state = 'ready'
 
     def isCollision(self, pos: list[int] , seuil_collision=27) -> bool:
         """
