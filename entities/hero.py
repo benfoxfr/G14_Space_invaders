@@ -1,5 +1,5 @@
-from characters.entity import Entity
-from characters.bullet import Bullet
+from entities.entity import Entity
+from entities.bullet import Bullet
 from pygame import mixer
 import pygame
 

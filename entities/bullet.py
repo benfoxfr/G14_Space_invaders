@@ -1,4 +1,4 @@
-from characters.entity import Entity
+from entities.entity import Entity
 import math
 
 class Bullet(Entity):

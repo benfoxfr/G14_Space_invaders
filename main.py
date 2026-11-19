@@ -1,9 +1,9 @@
 import random
 import pygame
 from pygame import mixer
-from characters.hero import Hero
-from characters.enemies import Enemy
-from characters.bullet import Bullet
+from entities.hero import Hero
+from entities.enemies import Enemy
+from entities.bullet import Bullet
 
 X = 0
 Y = 1
