@@ -66,11 +66,11 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            hero.shoot(screen, bullet, event, LASER_SOUND)
+            bullet.shoot(screen,hero.position[X], event, LASER_SOUND)
             hero.move(event)
 
         # Permet au héro de rester dans le cadre du jeu
-        hero.move_limitations()
+        hero.move_limits()
 
         # Boucle déplacement des ennemis
         for i in range(NUM_OF_ENEMIES):
@@ -95,8 +95,8 @@ def main():
         # Bullet Movement
         bullet.move_limitations()
 
-        # Permet de tirer les balles
-        bullet.fire(screen)
+        # Permet de déplacer la balle dans le jeu
+        bullet.move(screen)
 
         screen.blit(hero.load_sprite, hero.get_position)
 
