@@ -3,9 +3,6 @@ import pygame
 
 class Entity:
     def __init__(self, position: list[int], sprite: str, position_change: list[int]):
-        """
-        Initialisation des variables
-        """
         if len(position) != 2:
             raise ValueError(f"La liste {position} doit contenir la position [x, y]")
         self.position = position
@@ -19,44 +16,51 @@ class Entity:
     @property
     def get_sprite(self):
         """
-        Accesseur du chemin source image du charactère
+        retourne la source image
         """
         return self.sprite
 
     @property
     def get_position(self):
         """
-        Accesseur de la position
+        Retourne la position
         """
         return self.position
 
     @property
     def get_position_change(self):
         """
-        Accesseur de l'abcisse de la position du charactère
+        retourne la vitesse de déplacement
         """
         return self.position_change
 
     @property
     def load_sprite(self):
         """
-        Chargement du chemin source de l'image de charactère
-
+        Charge le sprite
         """
         return pygame.image.load(self.sprite)
 
-    def set_positionX(self, new_position, position_change=False):
+    def set_positionX(self, new_position: int, position_change=False) -> None:
         """
-        Initialisation de la position x du charactère
+        Modifie la position ou sa vitesse, mais seulement en X.
+
+        :param new_position: La nouvelle position ou vitesse
+        :param position_change: Booléen, s'il est True change la vitesse
+        :return: Change la position ou sa vitesse de déplacement.
         """
         if position_change:
             self.position_change[self.X] = new_position
         else:
             self.position[self.X] = new_position
 
-    def set_positionY(self, new_position, position_change=False):
+    def set_positionY(self, new_position: int, position_change=False) -> None:
         """
-        Initialisation de la position y du charactère
+        Change la position ou la vitesse, mais seulement en Y.
+
+        :param new_position: Nouvelle position ou vitesse
+        :param position_change: Booléen, s'il est True change la vitesse
+        :return: Change la position Y et la vitesse
         """
         if position_change:
             self.position_change[self.X] = new_position
@@ -65,8 +69,9 @@ class Entity:
 
     def set_sprite(self, new_sprite):
         """
-        Initialisation du chemin fichier de l'image de charactère
+        Modifie la source de l'image.
+
+        :param new_sprite: Nouvelle source image
+        :return: Change la source de l'image.
         """
         self.sprite = new_sprite
-
-
