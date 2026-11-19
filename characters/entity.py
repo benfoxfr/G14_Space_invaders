@@ -1,7 +1,7 @@
 import pygame
 
 
-class Character:
+class Entity:
     def __init__(self, position: list[int], sprite: str, position_change: list[int]):
         """
         Initialisation des variables

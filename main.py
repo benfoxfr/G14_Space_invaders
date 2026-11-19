@@ -10,6 +10,7 @@ Y = 1
 TEXTX = 10
 TEXTY = 10
 VITESSE_ENEMY = 2
+NUM_OF_ENEMIES = 20
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
@@ -44,8 +45,7 @@ def main():
     hero = Hero([370, 480],  [0, 0], PLAYER)
 
     # Enemy
-    num_of_enemies = random.randint(25, 30)
-    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40]) for _ in range(num_of_enemies)]
+    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40]) for _ in range(NUM_OF_ENEMIES)]
 
     # Bullet
 
@@ -74,7 +74,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-            hero.shoot(screen,bullet,event, LASER_SOUND)
+            hero.shoot(screen, bullet, event, LASER_SOUND)
             hero.move(event)
 
         # 5 = 5 + -0.1 -> 5 = 5 - 0.1
@@ -84,11 +84,11 @@ def main():
         hero.move_limitations()
 
         # Enemy Movement
-        for i in range(num_of_enemies):
+        for i in range(NUM_OF_ENEMIES):
 
             # Game Over
             if enemies[i].get_position[Y] > 440:
-                for j in range(num_of_enemies):
+                for j in range(NUM_OF_ENEMIES):
                     enemies[j].set_positionX(2000)
 
                 enemies[i].game_over(screen, over_font)

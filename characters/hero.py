@@ -1,11 +1,10 @@
-from characters.character import Character
+from characters.entity import Entity
 from characters.bullet import Bullet
 from pygame import mixer
 import pygame
 
 
-
-class Hero(Character):
+class Hero(Entity):
 
     def __init__(self, position: list[int], position_change: list[int], sprite: str):
         """

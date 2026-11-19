@@ -1,9 +1,10 @@
-from characters.character import Character
+from characters.entity import Entity
 from characters.bullet import Bullet
 from pygame import mixer
 import random
 
-class Enemy(Character):
+
+class Enemy(Entity):
     def __init__(self, position: list[int], sprite: str, position_change: list[int]):
         super().__init__(position, sprite, position_change)
 

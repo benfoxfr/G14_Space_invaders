@@ -1,7 +1,7 @@
-from characters.character import Character
+from characters.entity import Entity
 import math
 
-class Bullet(Character):
+class Bullet(Entity):
 
     def __init__(self, position: list, sprite:str, position_change: list, state: str,):
         """
