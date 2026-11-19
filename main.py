@@ -81,12 +81,12 @@ def main():
 
                 enemies[i].game_over(screen, over_font)
 
-            enemies[i].deplacement(VITESSE_ENEMY)
+            enemies[i].move(VITESSE_ENEMY)
 
             # Collision
             collision = bullet.isCollision(enemies[i].position)
             if collision:
-                enemies[i].mort(EXPLOSION_SOUND, bullet)
+                enemies[i].death(EXPLOSION_SOUND, bullet)
                 score_value += 1
 
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
