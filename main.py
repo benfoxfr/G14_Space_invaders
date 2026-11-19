@@ -52,6 +52,7 @@ def main():
 
     # Game Over
     over_font = pygame.font.Font('freesansbold.ttf', 64)
+    game_over = over_font.render("GAME OVER", True, (255, 255, 255))
 
     # Boucle de gameplay
     running = True
@@ -79,7 +80,7 @@ def main():
                 for j in range(NUM_OF_ENEMIES):
                     enemies[j].set_positionX(2000)
 
-                enemies[i].game_over(screen, over_font)
+                screen.blit(game_over, (200, 250))
 
             enemies[i].move(VITESSE_ENEMY)
 
