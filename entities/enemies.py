@@ -1,5 +1,3 @@
-from pygame.font import FontType
-from pygame.surface import SurfaceType
 from entities.entity import Entity
 from entities.bullet import Bullet
 from pygame import mixer
