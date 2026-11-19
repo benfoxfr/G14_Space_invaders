@@ -41,33 +41,24 @@ def main():
     icon = pygame.image.load(ICON)
     pygame.display.set_icon(icon)
 
-    # Player
+    # Initialisation du joueur et des ennemis, ainsi que les tirs
     hero = Hero([370, 480],  [0, 0], PLAYER)
-
-    # Enemy
     enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40]) for _ in range(NUM_OF_ENEMIES)]
-
-    # Bullet
-
-    # Ready - You can't see the bullet on the screen
-    # Fire - The bullet is currently moving
-
     bullet = Bullet([hero.position[0], 480], BULLET, [0, 10], "ready")
 
     # Score
-
     score_value = 0
     font = pygame.font.Font('freesansbold.ttf', 32)
 
     # Game Over
     over_font = pygame.font.Font('freesansbold.ttf', 64)
 
-    # Game Loop
+    # Boucle de gameplay
     running = True
     while running:
 
         # RGB = Red, Green, Blue
-        screen.fill((0, 0, 0))
+        screen.fill((0, 255, 0))
         # Background Image
         screen.blit(background, (0, 0))
         for event in pygame.event.get():
@@ -77,13 +68,10 @@ def main():
             hero.shoot(screen, bullet, event, LASER_SOUND)
             hero.move(event)
 
-        # 5 = 5 + -0.1 -> 5 = 5 - 0.1
-        # 5 = 5 + 0.1
-
-        # Permet à l'héro de rester dans le cadre du jeu
+        # Permet au héro de rester dans le cadre du jeu
         hero.move_limitations()
 
-        # Enemy Movement
+        # Boucle déplacement des ennemis
         for i in range(NUM_OF_ENEMIES):
 
             # Game Over
@@ -106,7 +94,7 @@ def main():
         # Bullet Movement
         bullet.move_limitations()
 
-        # Pemettre de tirer des balles du vaisseau spatiale
+        # Permet de tirer les balles
         bullet.fire(screen)
 
         screen.blit(hero.load_sprite, hero.get_position)
