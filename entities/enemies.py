@@ -30,7 +30,7 @@ class Enemy(Entity):
         """
         Mort d'un ennemi touché par une balle
 
-        :param sound: Son de mort d'un ennemi
+        :param sound: Son de la mort d'un ennemi
         :param bullet: La balle qu'il l'a touchée
         :param position_init: Position Y de la balle à réinitialiser
         :param volume: Volume du son
@@ -43,8 +43,3 @@ class Enemy(Entity):
         bullet.set_state("ready")
         self.position[self.X] = random.randint(0, 736)
         self.position[self.Y] = random.randint(50, 150)
-
-
-
-
-
