@@ -9,14 +9,16 @@ X = 0
 Y = 1
 TEXTX = 10
 TEXTY = 10
-VITESSE_ENEMY = 2
-NUM_OF_ENEMIES = 20
+VITESSE_ENEMY_MAX = 5
+NUM_OF_ENEMIES = 5
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
 ICON = './img/ufo.png'
 PLAYER = './img/player.png'
+ENEMY_SLOW = './img/enemy_slow.png'
 ENEMY = './img/enemy.png'
+ENEMY_FAST = './img/enemy_fast.png'
 BULLET = './img/bullet.png'
 LASER_SOUND = './wav/laser.wav'
 
@@ -43,7 +45,17 @@ def main():
 
     # Initialisation du joueur et des ennemis, ainsi que les tirs
     hero = Hero([370, 480],  [0, 0], PLAYER)
-    enemies = [Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [VITESSE_ENEMY, 40]) for _ in range(NUM_OF_ENEMIES)]
+
+    enemies = []
+    for vitesse in range(1, VITESSE_ENEMY_MAX+1):
+        for _ in range(NUM_OF_ENEMIES):
+            if vitesse == 1:
+                enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY_SLOW, [vitesse, 40]))
+            elif vitesse == VITESSE_ENEMY_MAX//2+1:
+                enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY, [vitesse, 40]))
+            elif vitesse == VITESSE_ENEMY_MAX:
+                enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY_FAST, [vitesse, 40]))
+
     bullet = Bullet([hero.position[0], 480], BULLET, [0, 10], "ready")
 
     # Score
@@ -73,16 +85,23 @@ def main():
         hero.move_limits()
 
         # Boucle déplacement des ennemis
-        for i in range(NUM_OF_ENEMIES):
+        for i in range(len(enemies)):
 
             # Game Over
             if enemies[i].get_position[Y] > 440:
-                for j in range(NUM_OF_ENEMIES):
+                for j in range(len(enemies)):
                     enemies[j].set_positionX(2000)
 
                 screen.blit(game_over, (200, 250))
 
-            enemies[i].move(VITESSE_ENEMY)
+            if enemies[i].get_position_change[X] == 1:
+                enemies[i].move(1)
+            elif enemies[i].get_position_change[X] == VITESSE_ENEMY_MAX//2+1:
+                enemies[i].move(VITESSE_ENEMY_MAX//2+1)
+            elif enemies[i].get_position_change[X] == VITESSE_ENEMY_MAX:
+                enemies[i].move(VITESSE_ENEMY_MAX)
+            else:
+                enemies[i].move(abs(enemies[i].get_position_change[X]))
 
             # Collision
             collision = bullet.isCollision(enemies[i].position)
