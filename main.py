@@ -106,7 +106,6 @@ def main():
                 is_GameOver = True
 
 
-
             if enemies[i].get_position_change[X] == 1:
                 enemies[i].move(1)
             elif enemies[i].get_position_change[X] == VITESSE_ENEMY_MAX//2+1:
