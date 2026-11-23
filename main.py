@@ -19,13 +19,21 @@ PLAYER = './img/player.png'
 ENEMY_SLOW = './img/enemy_slow.png'
 ENEMY = './img/enemy.png'
 ENEMY_FAST = './img/enemy_fast.png'
+MINIMUM_SPEED_BULLET = 15
 BULLET = './img/bullet.png'
+FAST_BULLET = './img/fast_bullet.jpg'
 LASER_SOUND = './wav/laser.wav'
+
+
 
 
 def main():
     # Intialize the pygame
     pygame.init()
+
+
+
+    number_shots = 0
 
     # create the screen
     screen = pygame.display.set_mode((800, 600))
@@ -74,11 +82,13 @@ def main():
         screen.fill((0, 255, 0))
         # Background Image
         screen.blit(background, (0, 0))
-        for event in pygame.event.get():
+        for i,event in enumerate(pygame.event.get()[:NUM_OF_ENEMIES]):
             if event.type == pygame.QUIT:
                 running = False
 
-            bullet.shoot(screen,hero.position[X], event, LASER_SOUND)
+
+            bullet.shoot(screen,hero.position[X], event, LASER_SOUND,score_value, FAST_BULLET, BULLET, enemies[i].position, MINIMUM_SPEED_BULLET)
+            number_shots +=1
             hero.move(event)
 
         # Permet au héro de rester dans le cadre du jeu
@@ -116,6 +126,9 @@ def main():
 
         # Permet de déplacer la balle dans le jeu
         bullet.move(screen)
+
+
+
 
         screen.blit(hero.load_sprite, hero.get_position)
 
