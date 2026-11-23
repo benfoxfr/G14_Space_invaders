@@ -9,6 +9,7 @@ X = 0
 Y = 1
 TEXTX = 10
 TEXTY = 10
+VITESSE_BULLET = 10
 VITESSE_ENEMY_MAX = 5
 NUM_OF_ENEMIES = 5 # Celui-ci est multiplié par 3, 5 lents, 5 moyens, 5 rapides
 EXPLOSION_SOUND = "./wav/explosion.wav"
@@ -19,7 +20,6 @@ PLAYER = './img/player.png'
 ENEMY_SLOW = './img/enemy_slow.png'
 ENEMY = './img/enemy.png'
 ENEMY_FAST = './img/enemy_fast.png'
-MINIMUM_SPEED_BULLET = 15
 BULLET = './img/bullet.png'
 FAST_BULLET = './img/fast_bullet.jpg'
 LASER_SOUND = './wav/laser.wav'
@@ -31,9 +31,7 @@ def main():
     # Intialize the pygame
     pygame.init()
 
-
-
-    number_shots = 0
+    bullet = 0
 
     # create the screen
     screen = pygame.display.set_mode((800, 600))
@@ -64,7 +62,8 @@ def main():
             elif vitesse == VITESSE_ENEMY_MAX:
                 enemies.append(Enemy([random.randint(0, 736), random.randint(50, 150)], ENEMY_FAST, [vitesse, 40]))
 
-    bullet = Bullet([hero.position[0], 480], BULLET, [0, 10], "ready")
+    bullets = (Bullet([hero.get_position[X], 480], BULLET, [0, VITESSE_BULLET], "ready"),
+               Bullet([hero.get_position[X], 480], FAST_BULLET, [0, VITESSE_BULLET*2], "ready"))
 
     # Score
     score_value = 0
@@ -73,6 +72,7 @@ def main():
     # Game Over
     over_font = pygame.font.Font('freesansbold.ttf', 64)
     game_over = over_font.render("GAME OVER", True, (255, 255, 255))
+    is_GameOver = False
 
     # Boucle de gameplay
     running = True
@@ -82,13 +82,13 @@ def main():
         screen.fill((0, 255, 0))
         # Background Image
         screen.blit(background, (0, 0))
-        for i,event in enumerate(pygame.event.get()[:NUM_OF_ENEMIES]):
+        for i,event in enumerate(pygame.event.get()):
             if event.type == pygame.QUIT:
                 running = False
+            if not is_GameOver:
+             bullets[bullet].shoot(screen,hero.position[X], enemies[i].position, event, LASER_SOUND)
 
 
-            bullet.shoot(screen,hero.position[X], event, LASER_SOUND,score_value, FAST_BULLET, BULLET, enemies[i].position, MINIMUM_SPEED_BULLET)
-            number_shots +=1
             hero.move(event)
 
         # Permet au héro de rester dans le cadre du jeu
@@ -101,8 +101,11 @@ def main():
             if enemies[i].get_position[Y] > 440:
                 for j in range(len(enemies)):
                     enemies[j].set_positionX(2000)
-
+                    hero.set_positionY(1000)
                 screen.blit(game_over, (200, 250))
+                is_GameOver = True
+
+
 
             if enemies[i].get_position_change[X] == 1:
                 enemies[i].move(1)
@@ -114,18 +117,25 @@ def main():
                 enemies[i].move(abs(enemies[i].get_position_change[X]))
 
             # Collision
-            collision = bullet.isCollision(enemies[i].position)
+            collision = bullets[bullet].isCollision(enemies[i].position)
             if collision:
-                enemies[i].death(EXPLOSION_SOUND, bullet)
+                enemies[i].death(EXPLOSION_SOUND, bullets[bullet])
                 score_value += 1
+                if score_value % 2 == 0:
+                    bullet = 1
+                else:
+                    bullet = 0
 
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
+
         # Bullet Movement
-        bullet.move_limitations()
+        bullets[bullet].move_limitations()
+
+
 
         # Permet de déplacer la balle dans le jeu
-        bullet.move(screen)
+        bullets[bullet].move(screen)
 
 
 

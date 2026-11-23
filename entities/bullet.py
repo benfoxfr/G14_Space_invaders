@@ -2,19 +2,20 @@ import pygame
 from pygame import mixer
 from pygame.event import Event
 from pygame.surface import SurfaceType
-
 from entities.entity import Entity
 import math
 
 class Bullet(Entity):
 
-    def __init__(self, position: list, sprite:str, position_change: list, state: str,):
+    def __init__(self, position: list, sprite:str, position_change: list, state: str):
         """
         Initialisation des variables intiales du projet
         """
         super().__init__(position,sprite,position_change)
         self.position_change = position_change
         self.state = state
+
+
 
     def get_state(self) -> str:
         """
@@ -34,15 +35,11 @@ class Bullet(Entity):
 
 
 
-    def shoot(self, screen: SurfaceType, pos_x : int,  event: Event, sound : str,score: int, other_bullet: str,bullet: str,pos_other_player: list[int], speed: int) -> None:
+    def shoot(self, screen: SurfaceType, pos_x : int, pos_enemy: list[int],  event: Event, sound : str) -> None:
         """
         Tire des bullets lorsque le joueur appuye sur la touche ESPACE
 
-        :param pos_other_player: La position d'un autre ennemi
-        :param bullet: l'image originale de la bullet
-        :param other_bullet: L'image d'un autre objet balle de la classe Bullet
-        :param score: Le score acquis par le joueur
-        :param speed: La vitesse de l'instance balle est 5 par défaut
+        :param pos_enemy: La position d'un ennemi
         :param pos_x:  la position en X d'une instance Hero
         :param sound: le son lorsque le héro tire
         :param screen: l'écran du jeu pour afficher l'image de l'instance Bullet
@@ -55,24 +52,11 @@ class Bullet(Entity):
                 bulletSound.set_volume(0.4)
                 bulletSound.play()
                 # Get the current x cordinate of the spaceship
-                self.state = "fire"
                 self.position[self.X] = pos_x
-            if self.isCollision(pos_other_player) or self.position[self.Y] == 480:
-                if score % 2 == 0  :
-                    self.sprite = bullet
-                    self.position_change[self.Y] = speed
+                self.state = "fire"
+
+            if self.isCollision(pos_enemy) or self.position[self.Y] == 480:
                     screen.blit(self.load_sprite, (self.get_position[self.X] + 30, self.get_position[self.Y] + 40))
-
-                elif score % 2 == 1:
-                    self.sprite = other_bullet
-                    self.position_change[self.Y] = speed * 2
-                    screen.blit(self.load_sprite, (self.get_position[self.X] + 30, self.get_position[self.Y] - 40))
-
-
-
-
-
-
 
 
     def move(self, screen: SurfaceType) -> None:
