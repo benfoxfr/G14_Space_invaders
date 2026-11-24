@@ -11,7 +11,7 @@ TEXTX = 10
 TEXTY = 10
 VITESSE_BULLET = 10
 VITESSE_ENEMY_MAX = 5
-NUM_OF_ENEMIES = 5 # Celui-ci est multiplié par 3, 5 lents, 5 moyens, 5 rapides
+NUM_OF_ENEMIES = 5  # Celui-ci est multiplié par 3, 5 lents, 5 moyens, 5 rapides
 EXPLOSION_SOUND = "./wav/explosion.wav"
 BACKGROUND = "./img/background.png"
 BACKGROUND_SOUND = "./wav/background.wav"
@@ -23,8 +23,6 @@ ENEMY_FAST = './img/enemy_fast.png'
 BULLET = './img/bullet.png'
 FAST_BULLET = './img/fast_bullet.jpg'
 LASER_SOUND = './wav/laser.wav'
-
-
 
 
 def main():
@@ -82,12 +80,11 @@ def main():
         screen.fill((0, 255, 0))
         # Background Image
         screen.blit(background, (0, 0))
-        for i,event in enumerate(pygame.event.get()):
+        for i, event in enumerate(pygame.event.get()):
             if event.type == pygame.QUIT:
                 running = False
             if not is_GameOver:
-             bullets[bullet].shoot(screen,hero.position[X], enemies[i].position, event, LASER_SOUND)
-
+                bullets[bullet].shoot(screen, hero.position[X], enemies[i].position, event, LASER_SOUND)
 
             hero.move(event)
 
@@ -104,7 +101,6 @@ def main():
                     hero.set_positionY(1000)
                 screen.blit(game_over, (200, 250))
                 is_GameOver = True
-
 
             if enemies[i].get_position_change[X] == 1:
                 enemies[i].move(1)
@@ -127,17 +123,11 @@ def main():
 
             screen.blit(enemies[i].load_sprite, enemies[i].get_position)
 
-
         # Bullet Movement
         bullets[bullet].move_limitations()
 
-
-
         # Permet de déplacer la balle dans le jeu
         bullets[bullet].move(screen)
-
-
-
 
         screen.blit(hero.load_sprite, hero.get_position)
 

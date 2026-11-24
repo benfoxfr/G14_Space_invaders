@@ -5,6 +5,7 @@ from pygame.surface import SurfaceType
 from entities.entity import Entity
 import math
 
+
 class Bullet(Entity):
 
     def __init__(self, position: list, sprite:str, position_change: list, state: str):
@@ -14,8 +15,6 @@ class Bullet(Entity):
         super().__init__(position,sprite,position_change)
         self.position_change = position_change
         self.state = state
-
-
 
     def get_state(self) -> str:
         """
@@ -32,8 +31,6 @@ class Bullet(Entity):
         """
 
         self.state = new_state
-
-
 
     def shoot(self, screen: SurfaceType, pos_x : int, pos_enemy: list[int],  event: Event, sound : str) -> None:
         """
@@ -58,7 +55,6 @@ class Bullet(Entity):
             if self.isCollision(pos_enemy) or self.position[self.Y] == 480:
                     screen.blit(self.load_sprite, (self.get_position[self.X] + 30, self.get_position[self.Y] + 40))
 
-
     def move(self, screen: SurfaceType) -> None:
         """
         Permet à l'instance bullet de se déplacer dans le jeu
@@ -81,10 +77,10 @@ class Bullet(Entity):
 
     def isCollision(self, pos: list[int] , seuil_collision=27) -> bool:
         """
-        Détermine si il y a une collision entre un autre joueur que le héro et un projectile (bullet dans ce cas-ci)
+        Détermine s'il y a une collision entre un autre joueur que le héro et un projectile (bullet dans ce cas-ci)
 
         :param seuil_collision: le seuil de la collision qui est mis à 27 par défaut
         :param pos: la position de l'autre joueur
-        :return: True ssi la distance  euclidienne entre les coordonnées du projectile et ceux de  l'autre joueur est strictement inférieure  à 27
+        :return: True ssi la distance euclidienne entre les coordonnées du projectile et ceux de  l'autre joueur est strictement inférieure  à 27
         """
         return math.sqrt(math.pow(pos[self.X] - self.position[self.X], 2) + (math.pow(pos[self.Y] - self.position[self.Y], 2))) < seuil_collision
