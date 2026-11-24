@@ -1,12 +1,13 @@
 # G14_Space_invaders
 
-Lancer le start.bat pour démarrer le jeu
+## 1. Installez les librairies 
 
-### Si ça ne fonctionne pas tapez cette commande dans l'invite de commande 
+Fait avec python 3.13
 
-N'oubliez pas de lancer le terminal dans le fichier "G14_Space_invaders"
+``$ pip install requirements.txt``
+
+## 2. Lancer le jeu avec cette commande
+
+### /!\ Bien lancer la commande dans le fichier G14_Space_invaders /!\
 
 ``$ python main.py``
-
-
-
