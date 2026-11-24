@@ -84,7 +84,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if not is_GameOver:
-                bullets[bullet].shoot(screen, hero.position[X], enemies[i].position, event, LASER_SOUND)
+                bullets[bullet].shoot(screen, hero.position[X], event, LASER_SOUND)
 
             hero.move(event)
 
