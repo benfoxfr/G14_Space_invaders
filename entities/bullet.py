@@ -8,12 +8,11 @@ import math
 
 class Bullet(Entity):
 
-    def __init__(self, position: list, sprite: str, position_change: list, state: str):
+    def __init__(self, position: list[int], sprite: str, position_change: list[int], state: str):
         """
         Initialisation des variables intiales du projet
         """
         super().__init__(position, sprite, position_change)
-        self.position_change = position_change
         self.state = state
 
     def get_state(self) -> str:
